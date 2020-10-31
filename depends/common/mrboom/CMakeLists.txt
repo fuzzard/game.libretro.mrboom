@@ -15,6 +15,24 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(LIBRETRO_DEBUG DEBUG=1)
 endif()
 
+function(download_file url filename hash_type hash)
+
+if(NOT EXISTS ${filename})
+  file(DOWNLOAD ${url} ${filename}
+       TIMEOUT 60  # seconds
+       EXPECTED_HASH ${hash_type}=${hash}
+       TLS_VERIFY ON)
+endif()
+
+endfunction(download_file)
+
+download_file(
+  https://github.com/libretro/libretro-common/archive/fedb955ff18465d879b8bb02c7e6fc17188780b1.tar.gz
+  ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/libretro-common-fedb955ff1.tar.gz
+  SHA1 8a7c8d17bbab5a6e007efd472229e5cbbc064912)
+
+file(ARCHIVE_EXTRACT INPUT ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/libretro-common-fedb955ff1.tar.gz)
+
 if(CORE_SYSTEM_NAME STREQUAL windows)
   find_package(MinGW REQUIRED)
   set(BUILD_COMMAND ${MINGW_MAKE} -j$ENV{NUMBER_OF_PROCESSORS} -C . -f Makefile platform=win  ${LIBRETRO_DEBUG} GIT_VERSION=)
