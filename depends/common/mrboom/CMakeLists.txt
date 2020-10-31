@@ -31,7 +31,7 @@ download_file(
   ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/libretro-common-fedb955ff1.tar.gz
   SHA1 8a7c8d17bbab5a6e007efd472229e5cbbc064912)
 
-file(ARCHIVE_EXTRACT INPUT ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/libretro-common-fedb955ff1.tar.gz)
+# file(ARCHIVE_EXTRACT INPUT ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/libretro-common-fedb955ff1.tar.gz)
 
 if(CORE_SYSTEM_NAME STREQUAL windows)
   find_package(MinGW REQUIRED)
